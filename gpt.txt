@@ -1,0 +1,205 @@
+// JavaScript
+
+//referenciar aos elementos do html criando variaveis
+const menu = document.querySelector("#menu");
+const sideMenu = document.querySelector("#sideMenu");
+
+//fazer referencia as barras do menu de modo individual
+const barra1 = document.querySelector("#barra1");
+const barra2 = document.querySelector("#barra2");
+const barra3 = document.querySelector("#barra3");
+
+//fazer referencia as casas
+const casa = document.getElementsByClassName("casa");
+
+//referencia ao botao
+const restartButton = document.querySelector("#restart")
+
+//criar 2 arrays
+var playerOneSelections = [];
+var playerTwoSelections = [];
+
+menu.addEventListener("click", toggleMenu)
+
+function toggleMenu() {
+  sideMenu.classList.toggle("show");
+  barra1.classList.toggle("barra1");
+  barra2.classList.toggle("barra2");
+  barra3.classList.toggle("barra3");
+  menu.classList.toggle("centralizar")
+}
+
+//definir o primeiro jogador
+var player = 1;
+var winner = "";
+
+
+for(var i = 0; i < casa.length; i++) {
+    casa[i].addEventListener("click", addElement)
+}
+
+
+//criar array que contem os elementos selecionadosn (o proposito dessas arrays sao para ditar selecao de casas)
+var casasJogador1 = [];
+var casasJogador2 = [];
+
+function addElement() {
+    if(playerOneSelections.length + playerTwoSelections.length === 9) {
+        restartButton.style.display='block';
+        restartButton.addEventListener('click', restartGame);
+        return;
+    } 
+
+    if (playerOneSelections.includes(this.id) || playerTwoSelections.includes(this.id)) {
+        return false;
+    }
+
+    const selectedHouse = this.id;
+    const split = selectedHouse.split('');
+    const houseNumber = parseInt(split[4]);
+
+    if (player === 1) {
+        playerOneSelections.push(houseNumber);
+        this.style.backgroundColor = 'blue';
+    } else {
+        playerTwoSelections.push(houseNumber);
+        this.style.backgroundColor = 'green';
+    }
+
+    checkWinner();
+
+    player = (player === 1? 2 : 1);
+
+} 
+
+    // if(vez == 1) {
+    //     console.log(vencedor)
+    //     // console.log(vez)
+    //     if(!casasJogador2.includes(this.id) && !casasJogador1.includes(this.id))  {
+    //         // console.log("vez do jogador " + vez)
+    //         const casaSelecionada = this.id;
+    //         // console.log(casaSelecionada)
+    //         const split = casaSelecionada.split("");
+    //         // console.log(split);
+    //         const casa = split[4];
+    //         // console.log(casa);
+    //         casasJogador1.push(this.id);
+    //         // console.log(casasJogador1)
+    //         this.style.backgroundColor="blue";
+
+    //         //para playerOneSelection
+    //         var casaId = this.id;
+    //         console.log(casaId);
+    //         // var split2 = casaId.split("");
+    //         // console.log(split2);
+    //         var casa2 = split[4];
+    //         console.log(typeof casa2)
+    //         var parse = parseInt(casa2)
+    //         console.log("a casa selecionada foi " + parse)
+    //         // console.log("a casa selecionada foi a " + casa2);
+    //         playerOneSelections.push(parse);
+    //         // console.log("as casas do jogador 1 sao:" + casasJogador1);
+    //         console.log("casas jogador 1: " + playerOneSelections)
+    //         console.log(vez)
+
+    //         // console.log("casas do jogador 1 sao: " + casasJogador1)
+    //         // console.log("vez FOI do: " + vez)
+
+    //         console.log("")
+    //     } else {
+    //         return false;
+    //     }
+            
+    //     } else if (!casasJogador1.includes(this.id) && !casasJogador2.includes(this.id)){
+    //         console.log(vencedor)
+    //         console.log("vez do jogador " + vez)
+    //         const casaSelecionada = this.id;
+    //         const split = casaSelecionada.split("");
+    //         // console.log(split)
+    //         casasJogador2.push(this.id);
+    //         this.style.backgroundColor="green";
+
+    //         //para playerTwoSelection
+    //         var casaId = this.id;
+    //         // console.log(casaId);
+    //         var split2 = casaId.split("");
+    //         // console.log(split2);
+    //         var casa2 = split[4];
+    //         var parse = parseInt(casa2)
+    //         console.log("a casa selecionada foi a " + casa2);
+    //         playerTwoSelections.push(parse);
+    //         // console.log("as casas do jogador 1 sao:" + casasJogador1);
+    //         console.log("casas jogador 2: " + playerTwoSelections)
+    //         // console.log(vez)
+    //         console.log("")
+
+            
+
+    //         // console.log("casas do jogador 2 sao: " + casasJogador2)
+    //         // console.log("vez FOI do: " + vez)
+    //     } else {
+            
+    //         return false;
+    //     }
+    //     vez = (vez == 1? 2:1);    
+    //     console.log(vez)
+    //     checarVencedor()
+    
+
+
+    function checkWinner() {
+        //criar as combinacoes possiveis de ganhar o jogo
+        const winningCombinations = [
+            [1, 2, 3], 
+            [4, 5, 6], 
+            [7, 8, 9],
+            [1, 4, 7], 
+            [2, 5, 8], 
+            [3, 6, 9], 
+            [1, 5, 9], 
+            [3, 5, 7] 
+        ];
+
+        for(let i = 0; i < winningCombinations.length; i++) {
+            const [a, b, c] = winningCombinations[i];
+            if(
+                playerOneSelections.includes(a) &&
+                playerOneSelections.includes(b) &&
+                playerOneSelections.includes(c)
+            ) {
+                // return 'player one';
+                vencedor = 1
+                console.log('O jogador 1 venceu!');
+                window.alert("o Jogador 1 venceu")
+                addElement()
+                
+            } else if (
+                playerTwoSelections.includes(a) &&
+                playerTwoSelections.includes(b) &&
+                playerTwoSelections.includes(c)
+            ) {
+                vencedor = 2
+                // return 'playerTwo'
+                console.log('O jogador 2 venceu!')
+                window.alert("o Jogador 2 venceu")
+                addElement()
+            }
+        }
+        return false
+    }
+
+
+
+
+
+
+    function restartGame() {
+        document.querySelectorAll(".casa").forEach(function(element) {
+            element.style.backgroundColor="red";
+        });
+        playerOneSelections = [];
+        playerTwoSelections = [];
+        casasJogador1 = [];
+        casasJogador2 = [];
+    }
+    
