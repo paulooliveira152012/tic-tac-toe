@@ -53,47 +53,31 @@ function addElement() {
         if(!casasJogador2.includes(this.id) && !casasJogador1.includes(this.id))  {
             const casaSelecionada = this.id;
             const split = casaSelecionada.split("");
-            // const casa = split[4];
-            // console.log(casa);
             casasJogador1.push(this.id);
-            // this.style.backgroundColor="blue";
             this.style.backgroundImage = "url('x.png')";
             this.style.backgroundSize = "cover";
 
 
             //para playerOneSelection
-            // var casaId = this.id;
-            // console.log(casaId);
             var casa2 = split[4];
-            // console.log(typeof casa2)
             var parse = parseInt(casa2) // "1" => 1
-            // console.log("a casa selecionada foi " + parse)
             playerOneSelections.push(parse);
-            // console.log(vez)
-            console.log("")
         } else {
             //se acasa nao esta disponivel, entao nao faz nada
             return false;
         }
             // se a casa esta disponivel, entao adicionar-la ao jogador 2
         } else if (!casasJogador1.includes(this.id) && !casasJogador2.includes(this.id)){
-            // console.log(vencedor)
-            // console.log("vez do jogador " + vez)
             const casaSelecionada = this.id;
             const split = casaSelecionada.split("");
-            // console.log(split)
             casasJogador2.push(this.id);
             this.style.backgroundImage="url('o.png')";
             this.style.backgroundSize="cover";
 
             //para playerTwoSelection
-            // var casaId = this.id;
             var casa2 = split[4];
             var parse = parseInt(casa2);
-            // console.log("a casa selecionada foi a " + casa2);
             playerTwoSelections.push(parse);
-            // console.log("casas jogador 2: " + playerTwoSelections)
-            // console.log("")
         } else {
             // se a casa nao esta disponivel, nao faz nada
             return false;
@@ -125,7 +109,6 @@ function addElement() {
             ) {
                 // return 'player one';
                 vencedor = 1;
-                // console.log("o vencedor e " + vencedor);
                 setTimeout(() => {
                     window.alert("o jogador 1 ganhou");
                 }, 500);
@@ -142,8 +125,6 @@ function addElement() {
                 playerTwoSelections.includes(c)
             ) {
                 vencedor = 2;
-                console.log("o vencedor e " + vencedor);
-
                 setTimeout(() => {
                     window.alert("o jogador " + vencedor + " ganhou");
                 }, 500);
@@ -151,8 +132,6 @@ function addElement() {
                 restartBtn.style.display="block";
                 //impossibilita continuar clicando nas casas
                 removeClickEvent()
-
-                // return false
             }
             // porcao de codigo para determinar um empate
             else if (
@@ -168,7 +147,6 @@ function addElement() {
 
 
     function restartGame() {
-        // console.log("O jogo reiniciou")
         //voltar a vez para jogador 1
         vez = 1
             //limpar arrays
@@ -190,5 +168,3 @@ function addElement() {
             casa[i].removeEventListener("click", addElement)
         }
     }
-
-    
