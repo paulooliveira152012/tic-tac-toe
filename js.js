@@ -57,7 +57,7 @@ function addElement() {
             // console.log(casa);
             casasJogador1.push(this.id);
             // this.style.backgroundColor="blue";
-            this.style.backgroundImage = "url('/x.png')";
+            this.style.backgroundImage = "url('x.png')";
             this.style.backgroundSize = "cover";
 
 
@@ -83,7 +83,7 @@ function addElement() {
             const split = casaSelecionada.split("");
             // console.log(split)
             casasJogador2.push(this.id);
-            this.style.backgroundImage="url('/o.png')";
+            this.style.backgroundImage="url('o.png')";
             this.style.backgroundSize="cover";
 
             //para playerTwoSelection
