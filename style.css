@@ -7,6 +7,12 @@ body {
     background-color: #1f1f1d87;
 }
 
+.section2 {
+    width: 100%;
+    height: auto;
+}
+
+
 header {
     width: 100%;
     height: 70px;
